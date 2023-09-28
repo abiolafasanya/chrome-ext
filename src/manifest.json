@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "HelpMeOut",
+  "version": "1.0.1",
+  "description": "Help out by creating videos on how to get things done and sending out instantly",
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open"
+  },
+  "permissions": ["activeTab", "desktopCapture", "sidePanel", "scripting"],
+  "host_permission": [
+    "http://*/**",
+    "https://*/**"
+  ]
+
+}
