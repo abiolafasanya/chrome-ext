@@ -1,37 +1,58 @@
-import RecordRTC, { RecordRTCPromisesHandler, invokeSaveAsDialog } from 'recordrtc';
+import { useState } from 'react';
+// import RecordRTC, {
+//   RecordRTCPromisesHandler,
+//   Recorder,
+//   invokeSaveAsDialog,
+// } from 'recordrtc';
 
-async function startRecording() {
-  let mediaDevices = navigator.mediaDevices;
-  const stream: MediaStream = await mediaDevices.getUserMedia({
-    video: true,
-    audio: true,
-  });
-  const recorder = new RecordRTCPromisesHandler(stream, {
-    type: 'video',
-  });
-  await recorder.startRecording();
-}
+export type RecordType = 'video' | 'screen';
+export type StreamType = 'screen' | 'window';
 
-function stopRecording() {
-    navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true
-    }).then(async function(stream) {
-        let recorder = new RecordRTC(stream, {
-            type: 'video'
-        });
-        recorder.startRecording();
-    
-        const sleep = (time: number) => new Promise(r => setTimeout(r, time));
-        await sleep(3000);
-    
-        recorder.stopRecording(function() {
-            let blob = recorder.getBlob();
-            invokeSaveAsDialog(blob);
-        });
-    });
-}
+const useRecording = () => {
+  const [isRecording, setIsRecording] = useState(false);
 
-export {
-    startRecording, stopRecording
-}
+  const [enableAudio, setEnableAudio] = useState(false);
+  const [enableVideo, setEnableVideo] = useState(false);
+  const [error, setError] = useState('');
+
+  function toggleAudioSwitch() {
+    setEnableAudio((audio) => !audio);
+  }
+
+  function toggleVideoSwitch() {
+    setEnableVideo((video) => !video);
+  }
+
+  const startRecord = async () => {
+    setError('');
+    setIsRecording(false);
+    // startRecording();
+
+    await chrome.tabs
+      .query({
+        active: true,
+        currentWindow: true,
+      })
+      .then(async (tab) => {
+        const [currentTab] = tab;
+        if (currentTab.id) {
+          console.log(currentTab);
+          await chrome.tabs.sendMessage(currentTab.id, {
+            greeting: 'start recording',
+          });
+        }
+      });
+  };
+
+  return {
+    startRecord,
+    enableAudio,
+    enableVideo,
+    toggleAudioSwitch,
+    toggleVideoSwitch,
+    error,
+    isRecording,
+  };
+};
+
+export default useRecording;

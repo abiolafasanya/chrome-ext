@@ -12,10 +12,15 @@
     "default_popup": "index.html",
     "default_title": "Open"
   },
-  "permissions": ["activeTab", "desktopCapture", "sidePanel", "scripting"],
-  "host_permission": [
-    "http://*/**",
-    "https://*/**"
-  ]
-
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "externally_connectable": {
+    "matches": ["<all_urls>"]
+  },
+  
+  "permissions": ["tabs", "activeTab", "scripting","messaging"]
 }
