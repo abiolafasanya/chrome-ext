@@ -34,12 +34,10 @@ const useRecording = () => {
         currentWindow: true,
       })
       .then(async (tab) => {
-        const [currentTab] = tab;
+        const [currentTab] = tab; 
         if (currentTab.id) {
           console.log(currentTab);
-          await chrome.tabs.sendMessage(currentTab.id, {
-            greeting: 'start recording',
-          });
+          await chrome.runtime.sendMessage({command: "trigger", tab: currentTab})
         }
       });
   };

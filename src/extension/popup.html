@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Help me</title>
+    <link rel="stylesheet" href="style.css" />  
+  <style>
+    body {font-family: 'Work Sans', sans-serif;}
+  </style>
+  </head>
+  <body style="padding: 1rem">
+    <main class="p-3 px-5 w-[320px] rounded-lg border">
+      <section class="mb-5">
+        <div class="flex justify-between">
+          <div class="flex gap-2 items-center">
+            <img src="./logo.png" alt="logo" class="w-[28px] h-[28px]" />
+            <h3 class="text-lg">HelpMe</h3>
+          </div>
+          <div class="flex gap-2">
+            <img src="./icons//setting.svg" alt="" />
+            <img src="./icons//close.svg" alt="" />
+          </div>
+        </div>
+      </section>
+      <section class="mb">
+        <p class="text-sm text-main-500 text-left font-light">
+          This extension helps you record and share help videos with ease.
+        </p>
+
+        <div class="flex itesm-center justify-center gap-14 my-6">
+          <div class="flex flex-col items-center spac-y-2">
+            <img
+              src="./icons/desktop.svg"
+              alt="desktop view"
+              class="w-[32px] h-[32px]"
+            />
+            <span>Desktop</span>
+          </div>
+          <div class="flex flex-col items-center spac-y-2">
+            <img src="./icons/copy.svg" alt="" class="w-[32px] h-[32px]" />
+            <span class="text-main-500">Current Tab</span>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="flex flex-col gap-4 mb-5">
+          <div class="rounded-2xl border-2 border-main-500 py-3 px-5 w-full">
+            <div class="flex justify-between items-center">
+              <div class="flex gap-2 items-center">
+                <img
+                  src="./icons/video.svg"
+                  alt="video icon"
+                  class="w-[24px] h-[24px]"
+                />
+                <span class="text-main-500 text-base">Camera</span>
+              </div>
+
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" />
+                <div
+                  class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-main-300 dark:peer-focus:ring-main-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-main-600"
+                ></div>
+              </label>
+            </div>
+          </div>
+          <div class="rounded-2xl border-2 border-main-500 py-3 px-5 w-full">
+            <div class="flex justify-between items-center">
+              <div class="flex gap-2 items-center">
+                <img
+                  src="./icons/audio.svg"
+                  alt="audio icon"
+                  class="w-[24px] h-[24px]"
+                />
+                <span class="text-main-500 text-base">Audio</span>
+              </div>
+
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  value=""
+                  class="sr-only peer outline-none" />
+                <div
+                  class="w-11 h-6 bg-input peer-focus:outline-none dark:peer-focus:ring-main-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-main-600"
+                ></div
+              ></label>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="my-5">
+        <div class="w-full">
+          <button type="button" class="w-full h-[48px ] text-white bg-main-700 hover:bg-main-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-main-600 dark:hover:bg-main-700 focus:outline-none dark:focus:ring-main-800">Start Recording</button>
+        </div>
+      </section>
+    </main>
+    <script src=""></script>
+  </body>
+</html>

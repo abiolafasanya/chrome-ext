@@ -7,7 +7,8 @@
     "dev": "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "build": "tsc && vite build && cp src/manifest.json ./dist/ && cp -r public/* dist/"
+    "build": "tsc && vite build && cp src/manifest.json ./dist/ && cp -r public/* dist/",
+    "style": "npx tailwindcss -i ./src/index.css -o ./dist/style.css --watch"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
