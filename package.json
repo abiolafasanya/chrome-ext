@@ -1,0 +1,17 @@
+{
+  "name": "chrome-ext-screen-recorder",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "npx tailwindcss -i ./src/index.css -o ./dist/style.css --watch"
+  },
+  "dependencies": {
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.246",
+    "@types/node": "^20.7.1"
+  }
+}

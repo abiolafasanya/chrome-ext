@@ -8,6 +8,15 @@ document
       func: () => {
         let isRecording = null;
         let isStopped = null;
+
+        const timer = document.createElement('div');
+        timer.id = 'timer';
+        timer.className = `flex items-center text-md justify-center p-2 cursor-pointer w-28 text-white px-5`;
+        timer.innerHTML = `<p class="flex gap-2 items-center"><span>00:00:00</span>  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="10" height="10" rx="5" fill="#C00404"/>
+        </svg> <span class="border-l border-white">&nbsp;</span>
+        </p>`;
+
         const recordButton = document.createElement('button');
         recordButton.id = 'record';
         recordButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-white`;
@@ -66,16 +75,16 @@ document
         // Create a container div for the buttons
         const controlButtonsContainer = document.createElement('div');
         controlButtonsContainer.className =
-          'w-[400px] flex gap-4 py-4 px-5 justify-center items-center bottom-10  rounded-full bg-[#141414] mx-20 p-3';
+          ' flex gap-4 py-4 px-5 justify-center items-center bottom-10  rounded-full bg-[#141414] mx-20 p-3';
 
         // Append the buttons to the container
+        controlButtonsContainer.appendChild(timer);
         controlButtonsContainer.appendChild(recordButton);
         controlButtonsContainer.appendChild(stopButton);
         controlButtonsContainer.appendChild(videoButton);
         controlButtonsContainer.appendChild(audioButton);
         controlButtonsContainer.appendChild(deleteButton);
 
-   
         controlButtonsContainer.classList.add('draggable');
         controlButtonsContainer.draggable = true;
 
@@ -87,12 +96,10 @@ document
         const body = document.body.appendChild(controlButtonsContainer);
 
         const constraints = {
-          audio: false,
-          video: {
-            mediaSource: 'screen', // Capture the entire screen
-          },
+          audio: true,
+          video: true,
         };
-        const apiEndpoint = 'https://tabitha-njoki.onrender.com/upload'; //'https://tabitha-njoki.onrender.com/upload';
+        const apiEndpoint = 'https://druth-video-api.onrender.com/upload_video' //'https://tabitha-njoki.onrender.com/upload'; //'https://tabitha-njoki.onrender.com/upload';
 
         body.style.margin = '5rem';
         body.style.position = 'fixed';
@@ -133,6 +140,12 @@ document
               });
           }
         }
+
+        async function fetchVideo(filename) {
+          const res = await fetch(`https://druth-video-api.onrender.com/get_video/${filename}`)
+          // const data = res.json();
+          return res.url
+        }
         async function stopRecording() {
           isStopped = true;
           isRecording = false;
@@ -141,7 +154,8 @@ document
           if (recorder && recorder.state !== 'inactive') {
             recorder.stop();
             recorder.onstop = () => {
-              const blob = new Blob(recordedChunks, { type: 'video/webm' });
+              const blob = new Blob(recordedChunks, { type: recordedChunks[0].type || 'video/webm' });
+              console.log()
               recordedChunks = [];
 
               if (stream) {
@@ -156,7 +170,7 @@ document
 
               const formData = new FormData();
               formData.append(
-                'url',
+                'video',
                 blob,
                 `untitled_video_${new Date().getTime()}.webm`
               );
@@ -170,9 +184,18 @@ document
                     console.log(
                       'Screen recording sent to the API successfully.'
                     );
+                    return response.json()
                   } else {
                     console.error('Error sending screen recording to the API.');
                   }
+                }).then(async (stream) => {
+                  console.log(stream.filename, "recieved")
+                  const result = await fetchVideo(stream.filename)
+                  console.log("recieved", result)
+                  // window.location.href=`http://localhost:3000?filename=${filename}`
+                //  return window.location.href = "http://localhost:3000";
+                window.open(`http://localhost:3000?recording=${result}`); 
+
                 })
                 .catch((error) => {
                   console.error(
@@ -187,10 +210,10 @@ document
         recordButton.addEventListener('click', (e) => {
           // e.currentTarget.disabled = isRecording; // Disable the button
           if (isRecording) {
-            recordButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-[#141414]`
+            recordButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-[#141414]`;
             recordButton.classList.add('disabled:bg-[#141414]');
           } else {
-            recordButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-white`
+            recordButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-white`;
           }
           startRecording();
         });
@@ -198,9 +221,9 @@ document
         stopButton.addEventListener('click', (e) => {
           e.currentTarget.disabled = isStopped;
           if (isStopped) {
-            stopButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-[#141414]`
+            stopButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-[#141414]`;
           } else {
-            stopButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-white`
+            stopButton.className = `flex items-center justify-center rounded-full p-2 h-10 w-10 cursor-pointer bg-white`;
           }
           setTimeout(() => {
             stopRecording();
