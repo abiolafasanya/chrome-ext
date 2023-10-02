@@ -99,8 +99,7 @@ document
           audio: true,
           video: true,
         };
-        const newPoint = 'https://druth-video-api.onrender.com/upload_video'
-        const apiEndpoint =  'https://tabitha-njoki.onrender.com/upload'; //'https://tabitha-njoki.onrender.com/upload';
+        const apiEndpoint = 'https://tabitha-njoki.onrender.com/upload'; //'https://tabitha-njoki.onrender.com/upload';
 
         body.style.margin = '5rem';
         body.style.position = 'fixed';
@@ -121,12 +120,28 @@ document
             recorder.pause();
             console.log('recording paused');
           } else {
-            stream = navigator.mediaDevices.getDisplayMedia(constraints);
+            stream = navigator.mediaDevices.getDisplayMedia({
+              video: true,
+              audio: true,
+            });
+
             console.log('recording started');
 
             stream
               .then((mediaStream) => {
-                recorder = new MediaRecorder(mediaStream);
+                recorder = new MediaRecorder(mediaStream, {
+                  mimeType: 'video/webm;codecs=vp9,opus',
+                });
+                const audioTrack = mediaStream?.getAudioTracks();
+                console.log(audioTrack, 'audio track');
+
+                // const audio = mediaStream?.getAudioTracks();
+                // if(audio) {
+                //   console.log({ audio });
+                //  audio.map(record => {
+                //   record.enabled=true
+                //  })
+                // }
 
                 recorder.ondataavailable = (event) => {
                   if (event.data.size > 0) {
@@ -142,6 +157,30 @@ document
           }
         }
 
+        async function activateAudio() {
+          try {
+            await navigator.mediaDevices.getUserMedia({
+              audio: true,
+              video: false,
+            });
+          } catch (e) {
+            console.log('no audio');
+          }
+        }
+
+        async function activateVideo() {
+          try {
+            await navigator.mediaDevices
+              .getUserMedia({
+                audio: false,
+                video: true,
+              })
+              
+          } catch (e) {
+            console.log('no audio');
+          }
+        }
+
         async function stopRecording() {
           isStopped = true;
           isRecording = false;
@@ -150,8 +189,10 @@ document
           if (recorder && recorder.state !== 'inactive') {
             recorder.stop();
             recorder.onstop = () => {
-              const blob = new Blob(recordedChunks, { type: recordedChunks[0].type || 'video/webm' });
-              console.log()
+              const blob = new Blob(recordedChunks, {
+                mimeType: 'video/webm;codecs=vp9,opus',
+              });
+              console.log();
               recordedChunks = [];
 
               if (stream) {
@@ -180,17 +221,20 @@ document
                     console.log(
                       'Screen recording sent to the API successfully.'
                     );
-                    const res =  response.json()
-                    return res
+                    const res = response.json();
+                    return res;
                   } else {
                     console.error('Error sending screen recording to the API.');
                   }
-                }).then(async (data) => {
-                  console.log(data)
-                if(data){
-                  window.open(`https://chrome-ext-five.vercel.app/?recording=${data.url}&transcript=${data.transcribe_url}&filename=${data.video_name}`); 
-                } else throw new Error("An error occured")
-
+                })
+                .then(async (data) => {
+                  console.log(data);
+                  if (data) {
+                    const baseUrl= "https://chrome-ext-five.vercel.app"
+                    window.open(
+                      `${baseUrl}/playback?recording=${data.url}&transcript=${data.transcribe_url}&filename=${data.video_name}`
+                    );
+                  } else throw new Error('An error occured');
                 })
                 .catch((error) => {
                   console.error(
@@ -201,6 +245,14 @@ document
             };
           }
         }
+
+        audioButton.addEventListener('click', async (e) => {
+          await activateAudio();
+        });
+
+        videoButton.addEventListener('click', async (e) => {
+          await activateVideo();
+        });
 
         recordButton.addEventListener('click', (e) => {
           // e.currentTarget.disabled = isRecording; // Disable the button
@@ -222,7 +274,7 @@ document
           }
           setTimeout(() => {
             stopRecording();
-          }, 3000); // Stop recording after 3 seconds (adjust as needed)
+          }, 1000); // Stop recording after 1 seconds (adjust as needed)
         });
       },
     });
