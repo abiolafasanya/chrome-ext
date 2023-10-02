@@ -99,7 +99,8 @@ document
           audio: true,
           video: true,
         };
-        const apiEndpoint = 'https://druth-video-api.onrender.com/upload_video' //'https://tabitha-njoki.onrender.com/upload'; //'https://tabitha-njoki.onrender.com/upload';
+        const newPoint = 'https://druth-video-api.onrender.com/upload_video'
+        const apiEndpoint =  'https://tabitha-njoki.onrender.com/upload'; //'https://tabitha-njoki.onrender.com/upload';
 
         body.style.margin = '5rem';
         body.style.position = 'fixed';
@@ -144,7 +145,7 @@ document
         async function fetchVideo(filename) {
           const res = await fetch(`https://druth-video-api.onrender.com/get_video/${filename}`)
           // const data = res.json();
-          return res.url
+          return res.json()
         }
         async function stopRecording() {
           isStopped = true;
@@ -184,17 +185,20 @@ document
                     console.log(
                       'Screen recording sent to the API successfully.'
                     );
-                    return response.json()
+                    const res =  response.json()
+                    return res
                   } else {
                     console.error('Error sending screen recording to the API.');
                   }
-                }).then(async (stream) => {
-                  console.log(stream.filename, "recieved")
-                  const result = await fetchVideo(stream.filename)
-                  console.log("recieved", result)
+                }).then(async (data) => {
+                  console.log(data)
+                  // const result = await fetchVideo(stream.filename)
+                  // console.log("recieved", result)
                   // window.location.href=`http://localhost:3000?filename=${filename}`
                 //  return window.location.href = "http://localhost:3000";
-                window.open(`https://chrome-ext-five.vercel.app/?recording=${result}`); 
+                if(data){
+                  window.open(`http://localhost:3000?recording=${data.url}&transcript=${data.transcribe_url}&filename=${data.video_name}`); 
+                } else throw new Error("An error occured")
 
                 })
                 .catch((error) => {
