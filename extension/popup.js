@@ -197,7 +197,7 @@ document
                   // window.location.href=`http://localhost:3000?filename=${filename}`
                 //  return window.location.href = "http://localhost:3000";
                 if(data){
-                  window.open(`http://localhost:3000?recording=${data.url}&transcript=${data.transcribe_url}&filename=${data.video_name}`); 
+                  window.open(`https://chrome-ext-five.vercel.app/?recording=${data.url}&transcript=${data.transcribe_url}&filename=${data.video_name}`); 
                 } else throw new Error("An error occured")
 
                 })
