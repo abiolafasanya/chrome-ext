@@ -1,9 +1,17 @@
 'use client';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { transcript } from '../(home)/data/transcript';
+import { useSearchParams } from 'next/navigation';
 
 const VideoSection = () => {
+  const searchParams = useSearchParams().get("recording")
+  const [videoSrc, setVideoSrc] = useState<string>(() => searchParams ? searchParams : "")
+  useEffect(() => {
+    if(searchParams) {
+      setVideoSrc(searchParams)
+    }
+  }, [])
   const videoRef = useRef<HTMLVideoElement>(null);
   const [startTime, setStartTime] = useState(0);
   const [timerDisplay, setTimerDisplay] = useState('');
@@ -43,6 +51,7 @@ const VideoSection = () => {
           controls
           controlsList=''
           ref={videoRef}
+          src={videoSrc}
         >
           <source src='/docs/videos/flowbite.mp4' type='video/mp4' />
           Your browser does not support the video tag.

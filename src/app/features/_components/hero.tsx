@@ -7,10 +7,10 @@ import Image from 'next/image';
 const Hero = () => {
     return ( 
         <section className='w-full container mx-auto h-full py-10 '>
-        <div className='flex w-full gap-10 justify-between items-center'>
+        <div className='flex flex-col lg:flex-row w-full gap-10 justify-between items-center'>
           <div className='w-full'>
             <div className='max-w-[548px] py-5 flex flex-col gap-4'>
-              <h2 className='text-6xl font-semibold'>
+              <h2 className='text-4xl   lg:text-6xl font-semibold'>
                 Show Them Don’t Just Tell
               </h2>
               <p className='text base'>

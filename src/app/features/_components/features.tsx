@@ -17,7 +17,7 @@ const FeaturesArea = () => {
             </p>
           </div>
 
-          <div className='flex w-full justify-between gap-14  mt-10 p-10'>
+          <div className='flex flex-col lg:flex-row w-full justify-between gap-14  mt-10 p-10'>
             <div className='flex w-full justify-between flex-col items-center p-5'>
               {features.map((feature, i) => (
                 <div key={i} className='flex gap-2 flex-col w-full'>
