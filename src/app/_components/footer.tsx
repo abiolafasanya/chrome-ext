@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { menus } from '../(home)/data/menu';
+import { menus } from '../playback/data/menu';
 import Link from 'next/link';
 
 const Footer = () => {

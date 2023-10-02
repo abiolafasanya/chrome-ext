@@ -8,7 +8,7 @@ const FeaturesArea = () => {
     <>
       <section className='bg-gray-50 py-10 h-12' />
 
-      <section className='bg-white py-10'>
+      <section className='bg-white py-10' id='features'>
         <div className='container'>
           <div className='flex items-center justify-center w-full flex-col gap-2'>
             <h2 className='text-2xl font-semibold'>Features</h2>

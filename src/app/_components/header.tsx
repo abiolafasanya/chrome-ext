@@ -8,17 +8,17 @@ const Header = ({className}: {className?: string}) => {
     <div className={cn(styles, className)}>
       <Link href="/" className='flex gap-2 items-center'>
         <Image src='/logo.png' alt='logo' width={48} height={48} />
-        <h3 className='text-2xl text-main-500 font-semibold'>HelpMeOut</h3>
+        <h3 className='text-2xl text-main-500 font-medium'>HelpMeOut</h3>
       </Link>
-      <menu className='flex gap-4'>
-        <Link href={'/features'} className=''>
+      <menu className='flex gap-5'>
+        <Link href={'#features'} className=''>
           Features
         </Link>
         <Link href={'#how-it-works'} className=''>
           How it works
         </Link>
       </menu>
-      <button className='text-main-500'>Get Started</button>
+      <Link href={'/get-started'} className='text-main-500'>Get Started</Link>
     </div>
   );
 };

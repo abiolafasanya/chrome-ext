@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { transcript } from '../(home)/data/transcript';
+import { transcript } from '../playback/data/transcript';
 import { useSearchParams } from 'next/navigation';
 
 const VideoSection = () => {
