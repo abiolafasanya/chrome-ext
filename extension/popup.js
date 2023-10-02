@@ -142,11 +142,6 @@ document
           }
         }
 
-        async function fetchVideo(filename) {
-          const res = await fetch(`https://druth-video-api.onrender.com/get_video/${filename}`)
-          // const data = res.json();
-          return res.json()
-        }
         async function stopRecording() {
           isStopped = true;
           isRecording = false;
@@ -192,10 +187,6 @@ document
                   }
                 }).then(async (data) => {
                   console.log(data)
-                  // const result = await fetchVideo(stream.filename)
-                  // console.log("recieved", result)
-                  // window.location.href=`http://localhost:3000?filename=${filename}`
-                //  return window.location.href = "http://localhost:3000";
                 if(data){
                   window.open(`https://chrome-ext-five.vercel.app/?recording=${data.url}&transcript=${data.transcribe_url}&filename=${data.video_name}`); 
                 } else throw new Error("An error occured")
