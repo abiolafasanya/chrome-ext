@@ -6,6 +6,8 @@ import { useSearchParams } from 'next/navigation';
 
 const VideoSection = () => {
   const searchParams = useSearchParams().get("recording")
+  const transcriptParams = useSearchParams().get("transcript")
+  console.log(transcriptParams)
   const [videoSrc, setVideoSrc] = useState<string>(() => searchParams ? searchParams : "")
   useEffect(() => {
     if(searchParams) {

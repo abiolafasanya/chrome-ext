@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Fragment, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useSearchParams } from 'next/navigation';
 
 const socials = [
   { id: 1, name: 'Facebook', link: '', icon: "/socials/facebook.svg" },
@@ -14,6 +15,8 @@ const socials = [
 
 const EditSection = () => {
   const [disabled, setDisabled] = useState(true);
+  const searchParams = useSearchParams().get("filename")
+  const [filename, setFilename] = useState<string>(() => searchParams ? searchParams : "")
   return (
     <article className='w-full lg:w-1/2'>
       <h2 className='text-[45px] font-semibold'>Your video is ready!</h2>
@@ -22,7 +25,7 @@ const EditSection = () => {
         <div className='flex gap-5'>
           <Input
             disabled={disabled}
-            defaultValue={`Untitled_Video_${new Date().getTime()}`}
+            defaultValue={`${filename}`}
             className='border-none disabled:text-main-500 p-0 font-medium text-main-500 text-2xl max-w-sm'
           />
           <Image
