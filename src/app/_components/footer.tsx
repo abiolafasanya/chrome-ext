@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className='w-full h-full lg:h-[350px] bg-main-500 text-white'>
-      <div className='container w-full mx-auto flex flex-col p-10 md:flex-row items-center justify-between h-full'>
+    <footer className='w-full h-full lg:h-[350px] p-5 bg-main-500 text-white'>
+      <div className='container w-full mx-auto flex  gap-5 flex-col lg:p-10 md:flex-row lg:items-center lg:justify-between h-full'>
         <article className='flex items-center w-full gap-2'>
           <Image
             src={'/logo2.svg'}
@@ -16,7 +16,7 @@ const Footer = () => {
           />
           <span className='text-2xl '>HelpMeOut</span>
         </article>
-        <article className='flex flex-col md:flex-row flex-wrap gap-10 items-center justify-between w-full mx-10'>
+        <article className='flex md:flex-row flex-wrap gap-10 lg:items-center lg:justify-between w-full lg:mx-10'>
           {menus.map((menu, i) => (
             <div key={i}>
               <h4 className='text-base mb-4'>{menu.name}</h4>

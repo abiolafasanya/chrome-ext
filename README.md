@@ -1,10 +1,10 @@
 # Chrome Extension
 
 ## Chrome Extension Download
-Open [Chrome Extension Download](https://github.com/abiolafasanya/chrome-ext/blob/main/extension.zip) 
+Open [Chrome Extension Download](https://drive.google.com/file/d/1RZqNqPL6VFK8V99M_oLnAZxToaPxQKaq/view?usp=sharing) 
 
 ## Live Link
-Open [Chrome Extension Download](https://github.com/abiolafasanya/chrome-ext/blob/main/extension.zip) 
+Open [Chrome Extension Download](https://chrome-ext-five.vercel.app/) 
 
 ## Recording of how it works
-Open [Chrome Extension Download](https://asset.cloudinary.com/abiolafasanya/fbdc6cf539c600d4e4219d6776aecc05)
+Open [Chrome Extension Download](https://drive.google.com/file/d/1-NwYhr5ccjhNnE0zN6rrWub-prLrqxBa/view?usp=drive_link)
