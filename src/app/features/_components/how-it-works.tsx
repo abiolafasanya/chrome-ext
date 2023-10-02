@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const HowITWorks = () => {
   return (
-    <>
+    <div id='how-it-works'>
       <section className='bg-gray-50 py-10 h-12' />
 
       <section className='bg-white py-10'>
@@ -46,7 +46,7 @@ const HowITWorks = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
