@@ -194,7 +194,7 @@ document
                   console.log("recieved", result)
                   // window.location.href=`http://localhost:3000?filename=${filename}`
                 //  return window.location.href = "http://localhost:3000";
-                window.open(`http://localhost:3000?recording=${result}`); 
+                window.open(`https://chrome-ext-five.vercel.app/?recording=${result}`); 
 
                 })
                 .catch((error) => {
