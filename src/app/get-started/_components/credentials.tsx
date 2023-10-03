@@ -56,7 +56,7 @@ export default function CredentialForm() {
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input type="password" placeholder='Enter your password' {...field} />
               </FormControl>

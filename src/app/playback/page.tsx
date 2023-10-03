@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../_components/header';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import EditSection from '../_components/edit-section';
 import VideoSection from '../_components/video-section';
 import { Button } from '@/components/ui/button';
