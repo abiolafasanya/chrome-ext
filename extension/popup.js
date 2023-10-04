@@ -11,8 +11,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     chrome.scripting.insertCSS({
       target: {tabId: tab.id},
-      files: ['style.css'],
+      files: ['./style.css'],
     })
+
+    // chrome.action.openPopup()
 
   });
 

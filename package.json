@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "npx tailwindcss -i ./src/index.css -o ./dist/style.css --watch"
+    "build": "npx tailwindcss -i ./src/index.css -o ./extension/style.css --watch"
   },
   "dependencies": {
     "tailwind-merge": "^1.14.0",
