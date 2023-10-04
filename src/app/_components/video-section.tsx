@@ -1,18 +1,39 @@
 'use client';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { transcript } from '../playback/data/transcript';
+// import { transcript } from '../playback/data/transcript';
 import { useSearchParams } from 'next/navigation';
+import axios, { AxiosError } from 'axios';
+import { Transcript, TranscriptItem } from '@/types/transcript';
 
 const VideoSection = () => {
   const searchParams = useSearchParams().get("recording")
   const transcriptParams = useSearchParams().get("transcript")
-  console.log(transcriptParams)
+  // console.log(transcriptParams)
   const [videoSrc, setVideoSrc] = useState<string>(() => searchParams ? searchParams : "")
+  // const [transcript, setTranscript] = useState<TranscriptItem[]>([])
+
+  async function fetchTranscript() {
+    try {
+      if (transcriptParams) {
+        const { data, status } = await axios.get(transcriptParams, { responseType: 'text'});
+        if (status === 200) {
+          console.log(data); // This will log the content of the VTT file
+        }
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.error('An error occurred:', error);
+      }
+    }
+  }
+  
+  
   useEffect(() => {
     if(searchParams) {
       setVideoSrc(searchParams)
     }
+    fetchTranscript()
   }, [])
   const videoRef = useRef<HTMLVideoElement>(null);
   const [startTime, setStartTime] = useState(0);
@@ -95,12 +116,12 @@ const VideoSection = () => {
       <div className='py-5 mt-5 space-y-4'>
         <h3 className='text-xl font-semibold'>Transcript</h3>
         <article className='max-h-[300px] h-full overflow-y-auto'>
-          {transcript.map((script, i) => (
+          {/* {transcript.map((script, i) => (
             <div key={i} className='flex gap-5 bg-white text-black p-1'>
               <span>{script.time}</span>
               <span>{script.text}</span>
             </div>
-          ))}
+          ))} */}
         </article>
       </div>
     </article>

@@ -57,8 +57,8 @@ const EditSection = () => {
       </div>
       <div className='bg-main-100 py-3 px-5 rounded-lg flex justify-between mb-10'>
         <input
-          defaultValue={'Enter email of receiver'}
-          className='outline-none text-gray-600 bg-transparent border-none'
+          placeholder={'Enter email of receiver'}
+          className='w-4/5 outline-none text-gray-600 bg-transparent border-none'
         />
         <Button className='bg-main-300 hover:bg-main-400 px-5text-white'>
           Send
@@ -68,8 +68,8 @@ const EditSection = () => {
       <h3 className='text-2xl font-semibold'>Video Url</h3>
       <div className='border-2 py-3 px-5 rounded-lg flex justify-between mb-10'>
         <input
-          defaultValue={'https://www.helpmeout/Untitled_Video_20232509'}
-          className='outline-none text-gray-600 bg-transparent border-none'
+          defaultValue={playBack ? playBack:"https://www.helpmeout/Untitled_Video_20232509"}
+          className='w-4/5 outline-none text-gray-600 bg-transparent border-none'
         />
         <Button
           variant={'outline'}

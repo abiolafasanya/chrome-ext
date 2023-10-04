@@ -26,7 +26,7 @@ export default function Home() {
         </div>
         <p className='my-10 space-x-2 font-medium   '>
           <span className='text-gray-600 text-xl'>Don’t have an account?</span>
-          <Link href={"#"} className='text-main-500 text-xl'>Create account</Link>
+          <Link href={"/get-started"} className='text-main-500 text-xl'>Create account</Link>
         </p>
       </div>
       <Footer />  
